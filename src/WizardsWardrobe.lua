@@ -2,6 +2,7 @@ WizardsWardrobe = WizardsWardrobe or {}
 local WW = WizardsWardrobe
 local WWQ = WW.queue
 local WWV = WW.validation
+local WWG = WW.gui
 
 WW.name = "WizardsWardrobe"
 WW.simpleName = "Wizard's Wardrobe"
@@ -39,6 +40,22 @@ function WW.LoadSetupAdjacent( direct, skipValidation )
 	WW.LoadSetup( zone, pageId, newSetupId, false, skipValidation )
 end
 
+function WW.NextPage( directRight )
+	local currentPage = WW.selection.pageId
+	if directRight and currentPage < #WW.pages[ WW.selection.zone.tag ] then WW.selection.pageId = currentPage + 1 end -- going right and have space
+	if directRight and currentPage >= #WW.pages[ WW.selection.zone.tag ] then WW.selection.pageId = 1 end -- at last page -> cycle to first
+	if not directRight and currentPage == 1 then WW.selection.pageId = #WW.pages[ WW.selection.zone.tag ] end -- if cycling left and on first, cycle to last
+	if not directRight and currentPage > 1 then WW.selection.pageId = currentPage - 1 end -- going left from another page
+
+	WWG.BuildPage( WW.selection.zone, WW.selection.pageId, true ) -- make sure the ui is at current page
+
+	local pageName = WW.pages[ WW.selection.zone.tag ][ WW.selection.pageId ].name
+	local msg = GetString( WW_MSG_PAGE_LOADED )
+	WW.Log( msg, WW.LOGTYPES.NORMAL, 'FFFFFF', pageName, WW.selection.zone.name )
+	
+	WW.LoadSetupCurrent( 1, false ) -- load first setup of the newly selected page
+end
+
 function WW.IsReadyToSwap()
 	return not IsUnitInCombat( "player" ) and not IsUnitDeadOrReincarnating( "player" )
 end
@@ -73,7 +90,7 @@ function WW.LoadSetup( zone, pageId, index, auto, skipValidation )
 		local logMessage = WW.IsReadyToSwap() and GetString( WW_MSG_LOADSETUP ) or GetString( WW_MSG_LOADINFIGHT )
 		local logColor = WW.IsReadyToSwap() and WW.LOGTYPES.NORMAL or WW.LOGTYPES.INFO
 
-		WW.Log( logMessage, logColor, "FFFFFF", setup:GetName(), zone.name )
+		WW.Log( logMessage, logColor, "FFFFFF", setup:GetName(), pageName )
 
 		setupTask:WaitUntil( function()
 			return WW.IsReadyToSwap()

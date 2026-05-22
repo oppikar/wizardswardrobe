@@ -4,6 +4,7 @@ local language = {
 	WW_MSG_FIRSTSTART =
 	"Wenn du zum ersten Mal Wizard's Wardrobe benutzt, sieh dir bitte das FAQ und die Liste der Funktionen auf %s an. Dort werden die meisten Fragen schon beantwortet.",
 	WW_MSG_ENOENT = "Ein solcher Eintrag existiert nicht.",
+	WW_MSG_PAGE_LOADED = "Seite [%s] aus [%s] wurde geladen.",
 	WW_MSG_ERROR = "FEHLER!",
 	WW_MSG_LOADSETUP = "Lade Setup [%s] aus [%s].",
 	WW_MSG_LOADINFIGHT = "Lade Setup [%s] aus [%s] nach dem Kampf.",
@@ -303,6 +304,8 @@ local language = {
 	-- KEYBINDS
 	SI_BINDING_NAME_WW_HOTKEY_SHOW_UI = "Wizard's Wardrobe öffnen",
 	SI_BINDING_NAME_WW_HOTKEY_FIXES_FLIP_SHOULDERS = "Schulter reparieren",
+	SI_BINDING_NAME_WW_HOTKEY_PAGE_RIGHT = "Nächste Seite",
+	SI_BINDING_NAME_WW_HOTKEY_PAGE_LEFT = "Vorherige Seite",
 	SI_BINDING_NAME_WW_HOTKEY_SETUP_1 = "Setup 1 (Trash)",
 	SI_BINDING_NAME_WW_HOTKEY_SETUP_2 = "Setup 2",
 	SI_BINDING_NAME_WW_HOTKEY_SETUP_3 = "Setup 3",
