@@ -52,8 +52,6 @@ function WW.NextPage( directRight )
 	local pageName = WW.pages[ WW.selection.zone.tag ][ WW.selection.pageId ].name
 	local msg = GetString( WW_MSG_PAGE_LOADED )
 	WW.Log( msg, WW.LOGTYPES.NORMAL, 'FFFFFF', pageName, WW.selection.zone.name )
-	
-	WW.LoadSetupCurrent( 1, false ) -- load first setup of the newly selected page
 end
 
 function WW.IsReadyToSwap()
